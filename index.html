@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Maintenance Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Home Maintenance Tracker</h1>
+    <form id="taskForm">
+      <input type="text" id="taskName" placeholder="Task (e.g., Change Air Filter)" required />
+      <input type="date" id="taskDate" required />
+      <button type="submit">Add Task</button>
+    </form>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    const taskForm = document.getElementById('taskForm');
+    const taskList = document.getElementById('taskList');
+
+    function loadTasks() {
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      taskList.innerHTML = '';
+      tasks.forEach((task, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `${task.name} - Due: ${task.date} <button onclick="deleteTask(${index})">❌</button>`;
+        taskList.appendChild(li);
+        scheduleNotification(task);
+      });
+    }
+
+    function saveTask(name, date) {
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      tasks.push({ name, date });
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    function deleteTask(index) {
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      tasks.splice(index, 1);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      loadTasks();
+    }
+
+    function scheduleNotification(task) {
+      const taskDate = new Date(task.date);
+      const now = new Date();
+      const diff = taskDate.getTime() - now.getTime();
+
+      if (diff > 0) {
+        setTimeout(() => {
+          if (Notification.permission === 'granted') {
+            new Notification(`Task Reminder: ${task.name}`);
+          }
+        }, diff);
+      }
+    }
+
+    taskForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('taskName').value;
+      const date = document.getElementById('taskDate').value;
+      saveTask(name, date);
+      taskForm.reset();
+      loadTasks();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (Notification.permission !== 'granted') {
+        Notification.requestPermission();
+      }
+      loadTasks();
+    });
+  </script>
+</body>
+</html>
