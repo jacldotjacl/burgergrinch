@@ -1,4 +1,4 @@
-# Home Maintenance Tracker
+# BurgerGrinch
 
 A web-based application that helps homeowners manage and track essential home maintenance tasks with browser push notifications.
 
