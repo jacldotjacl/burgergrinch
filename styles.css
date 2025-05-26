@@ -1,12 +1,22 @@
 :root {
-    --primary-color: #4a90e2;
-    --secondary-color: #f5f5f5;
-    --text-color: #333;
-    --border-color: #ddd;
-    --success-color: #28a745;
+    --primary-color: #4CAF50;
+    --secondary-color: #2196F3;
     --warning-color: #ffc107;
+    --success-color: #28a745;
     --danger-color: #dc3545;
+    --border-color: #ddd;
     --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --background-color: #f5f5f5;
+    --text-color: #333;
+    --card-background: white;
+}
+
+[data-theme="dark"] {
+    --background-color: #1a1a1a;
+    --text-color: #ffffff;
+    --card-background: #2d2d2d;
+    --border-color: #404040;
+    --shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 * {
@@ -16,10 +26,11 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: #f8f9fa;
+    background-color: var(--background-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .app-container {
@@ -104,7 +115,7 @@ h1 {
 }
 
 .task-card {
-    background-color: white;
+    background-color: var(--card-background);
     border-radius: 8px;
     padding: 20px;
     box-shadow: var(--shadow);
@@ -167,7 +178,7 @@ h1 {
 }
 
 .modal-content {
-    background-color: white;
+    background-color: var(--card-background);
     padding: 30px;
     border-radius: 8px;
     width: 90%;
@@ -253,4 +264,55 @@ textarea {
 
 .task-card {
     animation: fadeIn 0.3s ease-out;
+}
+
+/* Toggle Switch Styles */
+.toggle-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.toggle-label input[type="checkbox"] {
+    position: relative;
+    width: 50px;
+    height: 24px;
+    -webkit-appearance: none;
+    background: #ccc;
+    outline: none;
+    border-radius: 20px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.toggle-label input:checked[type="checkbox"] {
+    background: var(--primary-color);
+}
+
+.toggle-label input[type="checkbox"]:before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    top: 2px;
+    left: 2px;
+    background: white;
+    transition: 0.3s;
+}
+
+.toggle-label input:checked[type="checkbox"]:before {
+    left: 28px;
+}
+
+.toggle-text {
+    margin-left: 10px;
+}
+
+/* Header Actions */
+.header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 } 
