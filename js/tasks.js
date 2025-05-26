@@ -27,12 +27,20 @@ class TaskManager {
 
     handleTaskSubmit(form) {
         const formData = new FormData(form);
+        const dueDate = formData.get('task-due-date');
+        
+        // Validate date
+        if (!dueDate || isNaN(new Date(dueDate).getTime())) {
+            alert('Please enter a valid due date');
+            return;
+        }
+
         const taskData = {
             id: formData.get('task-id') || Date.now().toString(),
             name: formData.get('task-name'),
             description: formData.get('task-description'),
             frequency: formData.get('task-frequency'),
-            dueDate: formData.get('task-due-date'),
+            dueDate: new Date(dueDate).toISOString(),
             priority: formData.get('task-priority'),
             status: formData.get('task-status') || 'pending',
             createdAt: formData.get('task-id') ? undefined : new Date().toISOString(),
@@ -113,6 +121,12 @@ class TaskManager {
         taskElement.draggable = true;
         taskElement.dataset.status = task.status;
 
+        // Format the date properly
+        const dueDate = new Date(task.dueDate);
+        const formattedDate = dueDate instanceof Date && !isNaN(dueDate) 
+            ? dueDate.toLocaleDateString() 
+            : 'No due date';
+
         taskElement.innerHTML = `
             <div class="task-header">
                 <h3 class="task-title">${task.name}</h3>
@@ -120,7 +134,7 @@ class TaskManager {
             </div>
             <p>${task.description}</p>
             <div class="task-details">
-                <p><strong>Due:</strong> ${new Date(task.dueDate).toLocaleDateString()}</p>
+                <p><strong>Due:</strong> ${formattedDate}</p>
                 <p><strong>Priority:</strong> ${task.priority}</p>
                 <p><strong>Frequency:</strong> ${task.frequency}</p>
             </div>
