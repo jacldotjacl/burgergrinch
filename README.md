@@ -1,4 +1,4 @@
-# BurgerGrinch
+# Home Maintenance Tracker
 
 A web-based application that helps homeowners manage and track essential home maintenance tasks with browser push notifications.
 
@@ -20,19 +20,6 @@ A web-based application that helps homeowners manage and track essential home ma
   - Cross-device accessibility
   - Smooth animations and transitions
 
-## Setup
-
-1. Clone this repository
-2. Allow push notifications when prompted
-3. Start managing your home maintenance tasks!
-
-## Technologies Used
-
-- HTML5
-- CSS3
-- JavaScript (ES6+)
-- Browser Push Notifications API
-- Local Storage for data persistence
 
 ## Browser Support
 
@@ -40,3 +27,4 @@ A web-based application that helps homeowners manage and track essential home ma
 - Firefox
 - Edge
 - Safari
+
