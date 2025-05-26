@@ -23,9 +23,8 @@ A web-based application that helps homeowners manage and track essential home ma
 ## Setup
 
 1. Clone this repository
-2. Open `index.html` in your browser
-3. Allow push notifications when prompted
-4. Start managing your home maintenance tasks!
+2. Allow push notifications when prompted
+3. Start managing your home maintenance tasks!
 
 ## Technologies Used
 
@@ -41,7 +40,3 @@ A web-based application that helps homeowners manage and track essential home ma
 - Firefox
 - Edge
 - Safari
-
-## License
-
-MIT License 
